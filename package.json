@@ -1,0 +1,29 @@
+{
+  "name": "@infinitywarg/slither-js",
+  "version": "0.10.0",
+  "description": "Typescript wrapper for Slither, the smart contract static analyzer",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test/script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infinitywarg/slither-ts.git"
+  },
+  "keywords": [
+    "slither",
+    "static",
+    "scanning",
+    "smart",
+    "contracts",
+    "evm",
+    "solidity"
+  ],
+  "author": "@infinitywarg",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/infinitywarg/slither-ts/issues"
+  },
+  "homepage": "https://github.com/infinitywarg/slither-ts#readme"
+}
