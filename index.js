@@ -1,28 +1,24 @@
+import { promisify } from "util";
 import { exec } from "child_process";
+const execute = promisify(exec);
 
-function runCommand(command) {
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Failed ${command} \n Result: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`Failed ${command} \n Result: ${stderr}`);
-      return;
-    }
-    console.log(`Success ${command} \n Result: ${stdout}`);
-  });
+async function runCommand(command) {
+  try {
+    console.log(`executing ${command}`);
+    const { stdout, stderr } = await execute(command);
+    console.log("stdout:", stdout);
+    console.log("stderr:", stderr);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function runSlitherScan(repositoryPath) {
-  // commands are being executed non-blocking
-  // change runcommand to return promise and then use async/await in this function
-  const appPath = "releases/0.10.0/slither";
-  runCommand(`chmod +x ${appPath}`);
-  runCommand(`${appPath} --version`);
-  runCommand(`cd ${repositoryPath}`);
-  runCommand(`pwd`);
-  runCommand(`${appPath} .`);
+async function runSlitherScan(repositoryPath) {
+  const slither = "releases/0.10.0/slither";
+  await runCommand(`cp ${slither} ${repositoryPath}/slither`);
+  await runCommand(`chmod +x ${repositoryPath}/slither`);
+  await runCommand(`${repositoryPath}/slither --version`);
+  await runCommand(`cd ${repositoryPath} && ${repositoryPath}/slither .`);
 }
 
 export { runSlitherScan };
